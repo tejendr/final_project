@@ -1,0 +1,466 @@
+html{
+  overflow-y: scroll; 
+}
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2c2966 !important;
+    padding: 15px;
+    text-align: center;
+    color:white;
+
+}
+
+
+nav h1 {
+        display: inline-block;
+        color:white;
+}
+nav {
+    background-color: #2c2966;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+        display: inline-block;
+    width:100%;
+        font-family: system-ui;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+        display: inline-block;
+        margin-left: 5%;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.user-info {
+    
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    display: inline-block;
+    float:right;
+    color:white;
+}
+
+
+        /* Style for login form */
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+
+.user-info p {
+    margin-top: 10px;
+}
+.candidate-search-bar{
+    margin:10px;
+    padding:10px;
+}
+.candidates{
+    padding:50px;
+}
+.candidate-profile{
+    display: inline-block;
+    margin: 50px;
+}
+
+ footer {
+            background-color: #2c2966 !important;
+            color: #fff;
+            display: block;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+.candidate-search-bar form{
+    float:left;
+    
+}
+
+.candidate-search-bar  div{
+    margin-left:20px;
+    width:100px;
+    float:left;
+
+
+}
+
+.candidate-search-bar  select{
+    
+    width:100%;
+    padding: 0.7rem 1rem !important;
+
+
+}
+
+
+.container {
+
+  margin: 0 auto; 
+  padding: 1rem;
+  border: 1px solid #ddd; 
+}
+
+/* Style the table */
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+table th,
+table td {
+  padding: 0.5rem 1rem; 
+  border: 1px solid #ddd; 
+  text-align: left; 
+}
+
+table thead th {
+  background-color: #f5f5f5; 
+}
+
+/* Style the "Add Question" section */
+.add-question {
+  margin-top: 2rem; 
+}
+
+.add-question h2 {
+  margin-bottom: 1rem; 
+}
+
+.add-question form {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 1rem; 
+}
+
+.add-question .form-group {
+  width: calc(50% - 0.5rem); 
+}
+
+.add-question label {
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+.add-question input,
+.add-question textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+}
+
+button {
+  width: 100%; 
+  padding: 0.7rem 1rem;
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+button:hover {
+  background-color: #3e8e41; 
+}
+
+
+#job-search-form {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 1rem; 
+}
+
+/* Style form labels and inputs */
+.tab-content label {
+  display: block; 
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.tab-content input,
+select {
+  width: 100%; 
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.tab-content  button {
+  padding: 1rem 2rem;
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+.tab-content  button:hover {
+  background-color: #3e8e41; 
+}
+
+.tab-content .form-group{
+        display: block;
+    margin: 10px;
+    width: 100%;
+}
+
+/* Style the tabs */
+.tabs {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: flex; 
+}
+
+.tabs li {
+  padding: 1rem 2rem;
+  border: 1px solid #ccc;
+  border-bottom: none; 
+  cursor: pointer; 
+}
+
+.tabs li.active {
+  background-color: #f5f5f5; 
+  border-bottom: 1px solid #ddd; 
+}
+
+/* Style the tab content */
+.tab-content {
+  padding: 1rem;
+}
+
+.tab-pane {
+  display: none; /* Hide all tab content initially */
+}
+
+.tab-pane.active {
+  display: block; /* Show the active tab content */
+}
+
+
+.dashboard .data-item {
+  border: 1px solid #ddd !important;
+  padding: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  display: flex !important; /* Make items a flexbox for checkbox alignment */
+  align-items: center !important; /* Align checkboxes vertically */
+}
+
+.dashboard .data-item input[type="checkbox"] {
+  margin-right: 0.5rem !important;
+}
+
+.dashboard .data-item label {
+  flex: 1 !important; /* Allow label to grow and fill remaining space */
+}
+
+.container {
+  display: flex; /* Make the container a flexbox */
+  width: 100%; /* Set the width to 100% */
+}
+
+.section {
+  flex: 1; 
+  padding: 1rem; 
+  border: 1px solid #ddd; 
+  text-align: center; /* Center the content inside each section */
+  height: 500px;
+}
+
+.main-content {
+  display: flex;
+}
+
+.content-wrapper {
+  flex-basis: 80%;
+  padding: 20px;
+}
+
+.sidebar {
+  margin-bottom: 20px;
+}
+
+.sidebar h2,
+.content h2 {
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.dashboard, select
+{
+    width:Auto !important;
+}
+
+.search-can{
+    padding: 12px;
+}
+.search-apply{
+    padding: 11px;
+    width: 150px;
+
+}
+
+
+.data-list {
+  display: flex; /* Make the container a flexbox for better alignment */
+  flex-direction: column; /* Stack elements vertically */
+  padding:20px;
+}
+
+.data-list input {
+  text-align: left; /* Left-align text in the inputs */
+}
+
+.data-list button {
+  margin-top: 10px; /* Move the button to the right side */
+}
+
+.data-list p{
+    text-align:left;
+
+}
+
+    .data-item {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: flex; /* Make items a flexbox for checkbox alignment */
+      align-items: center; /* Align checkboxes vertically */
+    }
+    .data-item input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+    .data-item label {
+      flex: 1; /* Allow label to grow and fill remaining space */
+    }
+
+.chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 250px; /* Adjust height as needed */
+      overflow-y: scroll; /* Enable scrolling for long chat conversations */
+      border: 1px solid #ddd;
+      padding: 1rem;
+    }
+    
+    .chat-message {
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+    }
+    
+    .chat-message.sent {
+      background-color: #e0f7fa;
+      align-self: flex-end; /* Right-align sent messages */
+    }
+
+input{
+    padding: 0.7rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#filter-btn{
+  width:200px !important;
+}
+
+.dashboard .data-item {
+/*    border: 0 !important;*/
+/*    border-bottom: 1px !important;*/
+    padding: 5px 0 !important;
+    margin-bottom: 5px 0 !important;
+    display: flex 0 !important;
+  }
+.dashboard .data-list{
+  .padding: 0 !important;}
+
+  .dashboard .data-list p {
+    text-align: left !important;
+    padding: 10px !important;
+  }
+
+  .dashboard .data-item label{
+    text-align: left !important;
+
+  }
+
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 12px; 
+  }
+
+  nav {
+    font-size: 12px; 
+  }
+
+  .container {
+    width: 100%; 
+
+ 
+}

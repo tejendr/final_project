@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="common.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+   
+    <div >
+       
+        <nav>
+            <h1>Recruiter.ai</h1>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="candidate.html">Candidates</a></li>
+                <li><a href="screening.html">Screening</a></li>
+                <li><a href="positions.html">Positions</a></li>
+            </ul>
+            <div class="user-info">
+                 <p>User Name: Tejendra</p>
+                <p><a href="#">Logout</a></p>
+            </div>
+        </nav>
+    
+      
+    <h1>Job Interview Questions</h1>
+    
+    <div class="filter-bar">
+      <select id="filter-department">
+        <option value="">All Departments</option>
+      </select>
+      <select id="filter-job">
+        <option value="">All Jobs</option>
+      </select>
+      
+      <input type="text" id="filter-location" placeholder="Filter by Location">
+      <button id="filter-btn">Filter</button>
+    </div>
+    
+
+    <div class="add-question">
+      <h2>Add Question</h2>
+      <form id="add-question-form">
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <input type="text" name="department" id="department" placeholder="Enter Department">
+        </div>
+        <div class="form-group">
+          <label for="job">Job:</label>
+          <input type="text" name="job" id="job" placeholder="Enter Job Title">
+        </div>
+        <div class="form-group">
+          <label for="question">Question:</label>
+          <textarea name="question" id="question" placeholder="Enter Interview Question"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input type="text" name="location" id="location" placeholder="Enter Interview Location (Optional)">
+        </div>
+        <button type="submit">Add Question</button>
+      </form>
+    </div>
+        <div class="question-list">
+      <h2>Listed Questions</h2>
+      <div id="questions-container">
+        <table id='questions-table'></table>
+      </div>
+    </div>
+    </div>
+ 
+    <footer>
+        <p>All Copyrights Reserved @2024</p>
+    </footer>
+<script type="text/javascript" src="common-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Recruiter.ai</h1>
+    </header>
+
+    <div class="login-container">
+        <h2>Login</h2>
+       <form id="loginForm" method="POST" action="/auth/login">
+            {% csrf_token %}
+            <input type="text" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+    <script type="text/javascript" src="{% static 'common-script.js' %}"></script>
+</body>
+</html>
