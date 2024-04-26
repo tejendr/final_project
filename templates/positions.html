@@ -1,27 +1,28 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
    
     <div class=''>
        
-        <nav>
+    <nav>
             <h1>Recruiter.ai</h1>
             <ul>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="outreach.html">Outreach</a></li>
-                <li><a href="candidate.html">Candidates</a></li>
-                <li><a href="screening.html">Screening</a></li>
-                <li><a href="positions.html">Positions</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/outreach">Outreach</a></li>
+                <li><a href="/candidate">Candidates</a></li>
+                <li><a href="/screening">Screening</a></li>
+                <li><a href="/positions">Positions</a></li>
             </ul>
             <div class="user-info">
-                <p>User Name:  Tejendra</p>
-                <p><a href="index.html">Logout</a></p>
+                 <p>User Name: {{ user.username }}</p>
+                <p><a href="/logout">Logout</a></p>
             </div>
         </nav>
     
@@ -35,9 +36,10 @@
     <div class="tab-content pos">
       <div class="tab-pane active" id="create">
        <form id="job-search-form">
+         {% csrf_token %}
       <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" placeholder="Enter Job Title">
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" placeholder="Enter position">
       </div>
       <div class="form-group">
         <label for="job-type">Job Type:</label>
@@ -46,6 +48,24 @@
           <option value="Full-Time">Full-Time</option>
           <option value="Part-Time">Part-Time</option>
           <option value="Contract">Contract</option>
+        </select>
+      </div>
+        <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+          <option value="">Select Job Type</option>
+          <option value="Closed">Full-Time</option>
+          <option value="Progress">Part-Time</option>
+          
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="department">Department:</label>
+        <select id="department" name="department">
+          <option value="">Select Department Type</option>
+          <option value="Technology">Technology</option>
+          <option value="Product">Product</option>
+          <option value="sales">sales</option>
         </select>
       </div>
       <div class="form-group">
@@ -68,56 +88,34 @@
         <label for="recruiter-email">Recruiter Email:</label>
         <input type="email" id="recruiter-email" name="recruiter-email" placeholder="Enter Recruiter Email (Optional)">
       </div>
-      <button type="submit">Create Job</button>
+      <button type="submit" id='job-form'>Create Job</button>
     </form>
       </div>
       <div class="tab-pane" id="modify">
 <table id="jobs-table">
           <thead>
             <tr>
-              <th>Job Title</th>
-              <th>Company</th>
+              <th>Position</th>
+              <th>Department</th>
               <th>Location</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Software Engineer</td>
-              <td>Acme Corporation</td>
-              <td>Seattle, WA</td>
-              <td>Open</td>
-            </tr>
-            <tr>
-              <td>Data Analyst</td>
-              <td>Tech Solutions Inc.</td>
-              <td>New York, NY</td>
-              <td>In Progress</td>
-            </tr>
-            <tr>
-              <td>Marketing Specialist</td>
-              <td>Global Media LLC</td>
-              <td>Chicago, IL</td>
-              <td>Closed</td>
-            </tr>
-            <tr>
-              <td>Sales Representative</td>
-              <td>Innovative Products</td>
-              <td>Los Angeles, CA</td>
-              <td>On Hold</td>
-            </tr>
+          <tbody id='jobs-table-body'>
+          
+          
           </tbody>
         </table>
         <div id="modify-form-container" style="display: none;">
           <h2>Modify Job Details</h2>
           <form id="modify-job-form">
             <div class="form-group">
-              <label for="modify-title">Job Title:</label>
-              <input type="text" id="modify-title" name="modify-title" required>
+              <label for="modify-Position">Position:</label>
+              <input type="text" id="modify-Position" name="modify-title" required>
             </div>
             <div class="form-group">
-              <label for="modify-company">Company:</label>
-              <input type="text" id="modify-company" name="modify-company" required>
+              <label for="modify-Department">Department:</label>
+              <input type="text" id="modify-Department" name="modify-Department" required>
             </div>
             <div class="form-group">
               <label for="modify-location">Location:</label>
@@ -126,11 +124,13 @@
             <div class="form-group">
               <label for="modify-status">Status:</label>
               <select id="modify-status" name="modify-status">
-                <option value="Open">Open</option>
-                <option value="In Progress">In Progress</option>
+                <option value="Progress">Progress</option>
                 <option value="Closed">Closed</option>
-                <option value="On Hold">On Hold</option>
               </select>
+            </div>
+           <div class="form-group" >
+              
+              <input type="text"  id="modify-id" name="modify-id" required>
             </div>
             <button type="submit">Save Changes</button>
           </form>
@@ -143,6 +143,7 @@
     <footer>
         <p>All Copyrights Reserved @2024</p>
     </footer>
-    <script type="text/javascript" src="common-script.js"></script>
+    <script type="text/javascript" src="{% static 'script/common-script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script/position.js' %}"></script>
 </body>
 </html>

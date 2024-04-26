@@ -1,57 +1,54 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 # Create your views here.
-
+from django.shortcuts import redirect
+from django.contrib.auth import logout, login
 
 from django.contrib.auth import authenticate
 
 def create_user(request):
-    if request.method == 'POST':
-        # Extract user data from the form
-        
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-
-
-        # Create a new user
-        user = User.objects.get(email, password)
-
-        # Update fields
-        user.first_name = first_name
-        user.last_name = last_name
-
-        # Save changes
-        user.save()
-
-        # Optionally, you can redirect to a success page
-        return render(request, 'dashboard.html')
-
-    # Render the form for creating a new user
+    
     return render(request, 'index.html')
 
+from .forms import LoginForm
+def log_in(request):
+    # import pdb;pdb.set_trace()
+    # user = User.objects.create_user("john3", "lennon@thebeatles.com", "johnpassword")
 
-def login(request):
+    if request.user.is_authenticated:
+        return  redirect('/dashboard')
+
+    # user.last_name = "Lennon"
+    # user.save()
     #import pdb;pdb.set_trace()
     if request.method == 'POST':
-
-        email = request.POST.get('email').strip()
-        password = request.POST.get('password').strip()
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username').strip()
+            password = request.POST.get('password').strip()
 
         # Authenticate user
-        user = authenticate(request, email='tejendra.iitp@gmail.com', password='kamal123')
-
-        if user is not None:
-            # Authentication successful, login the user
-            # Optionally, you can perform additional checks or operations here
-            
-            # Redirect to a success page (e.g., dashboard)
-            return render(request, 'dashboard.html')
-        else:
-            # Authentication failed, render login page with error message
-            return render(request, 'index.html', {'error_message': 'Invalid email or password'})
-
+            user = authenticate( username=username, password=password)
+            # import pdb;pdb.set_trace()
+            if user is not None:
+                # Authentication successful, login the user
+                # Optionally, you can perform additional checks or operations here
+                login(request, user)
+                # Redirect to a success page (e.g., dashboard)
+                print('success')
+                # request.user = user
+                return  redirect('/dashboard', user_id=user.id)
+            else:
+                # Authentication failed, render login page with error message
+                return render(request, 'index.html', {'error_message': 'Invalid email or password'})
+    form = LoginForm()
     # If request method is not POST, render login page
-    return render(request, 'index.html')
+    return render(request, 'index.html',{'form': form})
+
+def log_out(request):
+    logout(request)
+    # Redirect to a specific page
+    return redirect('/auth/login') 
 
 
 

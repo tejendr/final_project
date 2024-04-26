@@ -1,27 +1,30 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Screening Popups</title>
     
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
    
     <div class="">
        
-        <nav>
+<nav>
             <h1>Recruiter.ai</h1>
             <ul>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="outreach.html">Outreach</a></li>
-                <li><a href="candidate.html">Candidates</a></li>
-                <li><a href="screening.html">Screening</a></li>
-                <li><a href="positions.html">Positions</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/outreach">Outreach</a></li>
+                <li><a href="/candidate">Candidates</a></li>
+                <li><a href="/screening">Screening</a></li>
+                <li><a href="/positions">Positions</a></li>
             </ul>
             <div class="user-info">
-                <p>User Name: Tejendra</p>
-                <p><a href="#">Logout</a></p>
+                 <p>User Name: {{ user.username }}</p>
+                <p><a href="/logout">Logout</a></p>
             </div>
         </nav>
     
@@ -37,12 +40,21 @@
                        
                     </select>
                 </div>
+                <div>
+                   
+                        <form method="post" enctype="multipart/form-data" action="/candidate/upload/" >
+                            {% csrf_token %}
+                            <input type="file" name="resume" accept=".pdf,.doc,.docx">
+                            <button type="submit">Upload</button>
+                        </form>
+                    </div>
+    </form>
             </div>
             <div class="candidates">
                 <h2>Candidates Profile</h2>
                 <div class="candidate-profile">
                     <div class="profile-image">
-                        <img src="p1.jpeg" alt="Candidate profile picture">
+                        <img src="{% static 'images/p1.jpeg' %}"alt="Candidate profile picture">
                         <p>Image downloaded from google</p>
                     </div>
                     <div class="profile-info">
@@ -55,7 +67,7 @@
                 </div>
                 <div class="candidate-profile">
                     <div class="profile-image">
-                        <img src="p2.jpeg" alt="Candidate profile picture">
+                        <img src="{% static 'images/p2.jpeg' %}"> 
                         <p>Image downloaded from google</p>
                     </div>
                     <div class="profile-info">
@@ -68,7 +80,7 @@
                 </div>
                 <div class="candidate-profile">
                     <div class="profile-image">
-                        <img src="p3.jpeg" alt="Candidate profile picture">
+                        <img src="{% static 'images/p3.jpeg' %}"> 
                         <p>Image downloaded from google</p>
                     </div>
                     <div class="profile-info">

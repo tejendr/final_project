@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'position'
 ]
 
 MIDDLEWARE = [
@@ -46,9 +47,11 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'recruiter.urls'
@@ -121,12 +124,15 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'static/'),
 # ]
 STATIC_ROOT = join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 # print(STATIC_ROOT)
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
+STATICFILES_DIRS = [
+    BASE_DIR / "auth/static",
+    BASE_DIR / "position/static",
     
-# ]
+]
+print(STATIC_ROOT)
+print(STATIC_URL)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

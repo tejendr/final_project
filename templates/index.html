@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -15,11 +16,11 @@
     </header>
 
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Login </h2>
        <form id="loginForm" method="POST" action="/auth/login">
             {% csrf_token %}
-            <input type="text" id="email" name="email" placeholder="Email" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
+        {{ form.username }}
+        {{ form.password }}
             <input type="submit" value="Login">
         </form>
     </div>
@@ -27,6 +28,6 @@
     <footer>
         <p>&copy; 2024 Your Website. All rights reserved.</p>
     </footer>
-    <script type="text/javascript" src="{% static 'common-script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script/common-script.js' %}"></script>
 </body>
 </html>

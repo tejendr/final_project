@@ -24,6 +24,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',include('recruit.urls')),
     path('auth/',include('auth.urls')),
+    path('candidate/',include('candidate.urls')),
+    path('dashboard/',include('dasboard.urls')),
+    path('outreach/',include('outreach.urls')),
+    path('positions/',include('position.urls')),
+    path('screening/',include('screening.urls')),
+
+
     
  
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
