@@ -1,3 +1,6 @@
+var jobs = []
+var department = []
+
 $(document).ready(function(){
             // Function to fetch jobs via AJAX
     function getCookie(name) {
@@ -15,32 +18,69 @@ $(document).ready(function(){
     }
     return cookieValue;
 }  
-var jobs = []
-            function fetchJobs() {
-                $.ajax({
-                    url: '/positions/api/job/fetch/',  // URL of your fetch jobs endpoint
-                    type: 'GET',
-                    success: function(response) {
-                        // Clear existing job list
-                        $('#jobs-list').empty();
-                        jobs = response
-                        // Append each job to the job list
-                        $.each(response, function(index, job) {
-                            var jobItem = '  <tr ><td>'+job.position+'</td><td>'+job.department+'</td><td id='+index+'>'+job.address+'</td><td data-id="'+index+'">'+job.status+'</td>'
-                            $('#jobs-table-body').append(jobItem);
-                        });
-                    },
-                    error: function(xhr, textStatus, errorThrown){
-                        console.error(xhr.responseText);
-                        // Handle error response
-                    }
-                });
-            }
-            fetchJobs()
-            
-            // Call fetchJobs function when the page loads
-            // fetchJobs();
 
+
+
+
+function fetchJobs() {
+    $.ajax({
+    url: '/positions/fetch_departments/',
+    type: 'GET',
+    success: function(response) {
+        console.log(response);
+        var selectElement = document.getElementById("department-id");
+        
+        
+        department = response
+
+        department.forEach(function(dept) {
+        // Create an <option> element
+        var option = document.createElement("option");
+        
+        // Set the value and text of the <option> element
+        option.value = dept.id;
+        option.name = dept.name;
+        option.text = dept.name;
+        
+        // Append the <option> element to the <select> element
+        selectElement.appendChild(option);
+        });
+                
+                
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.error(xhr.responseText);
+            }
+        });
+
+
+        $.ajax({
+            url: '/positions/api/job/fetch/',  
+            type: 'GET',
+            success: function(response) {
+                // Clear existing job list
+                $('#jobs-list').empty();
+                jobs = response
+                // Append each job to the job list
+                update_jobs()
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.error(xhr.responseText);
+                // Handle error response
+            }
+        });
+    }
+    fetchJobs()
+    
+    function update_jobs(){
+        $.each(jobs, function(index, job) {
+            var jobItem = '  <tr ><td>'+job.position+'</td><td id='+job.department+'>'+job.department_name+'</td><td id='+index+'>'+job.address+'</td><td data-id="'+index+'">'+job.status+'</td>'
+            $('#jobs-table-body').append(jobItem);
+        });
+
+    }
+         
             
             $('#job-search-form').submit(function(e){
                 formData = {}
@@ -54,8 +94,11 @@ var jobs = []
                 });
                 
                 formData['job_type'] = $('#job-type').val()
-                formData['department'] = $('#department').val()
+                formData['department'] = $('#department-id').val()
                 formData['status'] = $('#status').val()
+                formData['location'] = $('#address').val()
+                formData['position'] = $('#position').val()
+
 
                 console.log(formData);
                 var url = ''
@@ -70,6 +113,10 @@ var jobs = []
                         console.log(response);
                         // Handle success response
                         fetchJobs()
+                        $('#popupModal').show();
+                
+                // Clear form fields
+                        $('input').val('');
                     },
                     error: function(xhr, textStatus, errorThrown){
                         console.error(xhr.responseText);
@@ -78,38 +125,35 @@ var jobs = []
                 });
             });
             
+        $('#modify-job-form').submit(function(e){
+                e.preventDefault();
+                let formData = {}
+                let jobId = jobId_selected
+                let url = '/positions/api/job/update/' + jobId + '/';
 
-$('#modify-job-form').submit(function(e){
-    e.preventDefault();
+                formData['department']=$("#modify-department").val()
+                formData['position']=$("#modify-Position").val()
+                formData['location']=$("#modify-location").val()
+                formData['status']=$("#modify-status").val()
 
-    // Manually construct JSON data from form fields
-    var formData = {
-        title: $('#modify-title').val(),
-        company: $('#modify-company').val(),
-        location: $('#modify-location').val(),
-        status: $('#modify-status').val()
-        // Add more fields as needed
-    };
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    data: formData,
+                        headers: {
+                            "X-CSRFToken": getCookie('csrftoken')
+    },
 
-    var jobId = $('#modify-id').val();
-    var url = '/positions/api/job/update/' + jobId + '/';
-
-    // Send AJAX request with JSON data and CSRF token
-    $.ajax({
-        type: 'PUT',
-        url: url,
-        contentType: 'application/json',
-        data: JSON.stringify(formData),
-        headers: {
-            "X-CSRFToken": getCookie('csrftoken')
-        },
-        success: function(response){
-            console.log(response);
-            // Handle success response
-        },
-        error: function(xhr, textStatus, errorThrown){
-            console.error(xhr.responseText);
-            // Handle error response
-        }
-    });
-});
+                    success: function(response){
+                        console.log(response);
+                        // Handle success response
+                        jobs = response
+                        update_jobs()
+                    },
+                    error: function(xhr, textStatus, errorThrown){
+                        console.error(xhr.responseText);
+                        // Handle error response
+                    }
+                });
+            });
+       });

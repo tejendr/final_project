@@ -31,17 +31,7 @@
       
     <h1>Job Interview Questions</h1>
     
-    <div class="filter-bar">
-      <select id="filter-department">
-        <option value="">All Departments</option>
-      </select>
-      <select id="filter-job">
-        <option value="">All Jobs</option>
-      </select>
-      
-      <input type="text" id="filter-location" placeholder="Filter by Location">
-      <button id="filter-btn">Filter</button>
-    </div>
+
     
 
     <div class="add-question">
@@ -49,20 +39,27 @@
       <form id="add-question-form">
         <div class="form-group">
           <label for="department">Department:</label>
-          <input type="text" name="department" id="department" placeholder="Enter Department">
-        </div>
+          <select id="department" name="department">
+            <option value="">Select Department</option>
+        </select>
+      </div>
         <div class="form-group">
-          <label for="job">Job:</label>
-          <input type="text" name="job" id="job" placeholder="Enter Job Title">
-        </div>
+        <label for="position">Job Position:</label>
+        <select id="position" name="position">
+          <option value="">Select Position </option>
+        </select>
+      </div>
+               <div class="form-group">
+        <label for="location">Location:</label>
+        <select id="location" name="location">
+          <option value="">Select Location</option>
+        </select>
+      </div>
         <div class="form-group">
           <label for="question">Question:</label>
           <textarea name="question" id="question" placeholder="Enter Interview Question"></textarea>
         </div>
-        <div class="form-group">
-          <label for="location">Location:</label>
-          <input type="text" name="location" id="location" placeholder="Enter Interview Location (Optional)">
-        </div>
+        
         <button type="submit">Add Question</button>
       </form>
     </div>
@@ -78,5 +75,6 @@
         <p>All Copyrights Reserved @2024</p>
     </footer>
 <script type="text/javascript" src="{% static 'script/common-script.js' %}"></script>
+<script type="text/javascript" src="{% static 'screening.js' %}"></script>
 </body>
 </html>

@@ -37,12 +37,16 @@
                 <div class="filters">
                     <select name="vacancy-filter-1">
                         <option value="">Sort by score</option>
+                         <option value="60">60</option>
+                          <option value="70">70</option>
+                           <option value="90">90</option>
                        
                     </select>
                 </div>
                 <div>
                    
-                        <form method="post" enctype="multipart/form-data" action="/candidate/upload/" >
+                        <form style='margin-left: 100px;
+    margin-top: -7px;' method="post" enctype="multipart/form-data" action="/candidate/upload/" >
                             {% csrf_token %}
                             <input type="file" name="resume" accept=".pdf,.doc,.docx">
                             <button type="submit">Upload</button>
@@ -52,49 +56,19 @@
             </div>
             <div class="candidates">
                 <h2>Candidates Profile</h2>
-                <div class="candidate-profile">
-                    <div class="profile-image">
-                        <img src="{% static 'images/p1.jpeg' %}"alt="Candidate profile picture">
-                        <p>Image downloaded from google</p>
-                    </div>
-                    <div class="profile-info">
-                        <h3>John Doe</h3>
-                        <p>Job Type: Software Engineer</p>
-                        <p>Department: Engineering</p>
-                        <p>Status: Applied</p>
-                        <button>Score: 88</button>
-                    </div>
+                <div id='student-append'>
+
+
                 </div>
-                <div class="candidate-profile">
-                    <div class="profile-image">
-                        <img src="{% static 'images/p2.jpeg' %}"> 
-                        <p>Image downloaded from google</p>
-                    </div>
-                    <div class="profile-info">
-                        <h3>Jane Smith</h3>
-                        <p>Job Type: Data Analyst</p>
-                        <p>Department: Data Science</p>
-                        <p>Status: Interviewing</p>
-                        <button>Score: 77</button>
-                    </div>
-                </div>
-                <div class="candidate-profile">
-                    <div class="profile-image">
-                        <img src="{% static 'images/p3.jpeg' %}"> 
-                        <p>Image downloaded from google</p>
-                    </div>
-                    <div class="profile-info">
-                        <h3>Michael Lee</h3>
-                        <p>Job Type: UI/UX Designer</p>
-                        <p>Department: Design</p>
-                        <p>Status: Hired</p>
-                        <button>Score: 92</button>
-                    </div>
-                </div>
+                
+               
+              
             </div>
         </div>
     </div>
     </div>
+    <script type="text/javascript" src="{% static 'script/common-script.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/candidate.js' %}"></script>
     <footer>
         <p>All Copyrights Reserved @2024</p>
     </footer>

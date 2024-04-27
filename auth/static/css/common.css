@@ -6,7 +6,9 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.hidden{
+  display: none !important;
+}
 header {
     background-color: #2c2966 !important;
     padding: 15px;
@@ -364,6 +366,8 @@ textarea {
 
 .search-can{
     padding: 12px;
+    width: 300px;
+
 }
 .search-apply{
     padding: 11px;

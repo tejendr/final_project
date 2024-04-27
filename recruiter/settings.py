@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'position'
+    'position',
+    'screening',
+    'candidate',
+    'outreach',
+    'dasboard'
 ]
 
 MIDDLEWARE = [
@@ -129,6 +133,13 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "auth/static",
     BASE_DIR / "position/static",
+    BASE_DIR / "screening/static",
+    BASE_DIR / "candidate/static",
+    BASE_DIR / "outreach/static",
+    BASE_DIR / "dasboard/static",
+
+
+
     
 ]
 print(STATIC_ROOT)

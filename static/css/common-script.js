@@ -1,4 +1,9 @@
     
+  function get_name_by_id(id, data):
+    for item in data:
+        if item['id'] == id:
+            return item['name']
+    return None
   function validateAndRedirect() {
   // Replace this with your actual login validation logic
   // This example simulates successful validation
@@ -29,7 +34,7 @@ if(window.location.href.indexOf('outreach')>0){
       const phone = phoneInput.value.trim();
       const email = emailInput.value.trim();
       const position = positionSelect.value;
-      const department = departmentSelect.value;
+      const department = get_name_by_id(departmentSelect.value,department);
 
       // Validate data (optional, add checks for empty fields or invalid formats)
 
@@ -96,7 +101,7 @@ function populateTable(data) {
   let tableRowW  =''
   data.forEach(question => {
     const tableRow = `<tr>
-      <td><span class="math-inline">`+question.department+`</td\>
+      <td><span class="math-inline">`+get_name_by_id(question.department,department)+`</td\>
 <td\></span>`+question.job+` (<span class="math-inline">`+question.jobId+`)</td\>
 <td\></span>`+question.question+`</td>
       <td>`+question.location+`</td>
@@ -108,34 +113,9 @@ function populateTable(data) {
   $(questionsTable).html(tableRowW);
 }
 
-const addQuestionForm = document.getElementById('add-question-form');
-addQuestionForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission
 
-  // Extract new question data from the form
-  const newQuestion = {
-    department: 'Technology'/* Get department value from form */,
-    job: 'Software engineer'/* Get job value from form */,
-    question: 'Are you able to relocate'/* Get question text from form */,
-    location:'Seattle' /* Get location value from form (optional) */,
-  };
 
-  // Add the new question to the data array
-  questionsData.push(newQuestion);
 
-  // Clear the form
-  // ...
-
-  // Update the table with the new data
-  populateTable(questionsData);
-});
-
-window.onload = function() {
-  if (questionsTable) { // Check if element exists before accessing
-    populateTable(questionsData);
-  }
-};
-}
 
 if(window.location.href.indexOf('positions')>-1){
       const tabs = document.querySelectorAll('.tabs li');
@@ -175,19 +155,42 @@ tabs.forEach(tab => {
 
 jobsTable.addEventListener('click', function(event) {
   if (event.target.tagName === 'TD') { // Check if clicked element is a table cell (TD)
+    var selectElement = document.getElementById("modify-department");
+    department.forEach(function(dept) {
+    // Create an <option> element
+    var option = document.createElement("option");
+    
+    // Set the value and text of the <option> element
+    option.value = dept.id;
+    option.name = dept.name;
+    option.text = dept.name;
+    
+    // Append the <option> element to the <select> element
+    
+    selectElement2.appendChild(option)
+});
     const rowIndex = event.target.parentNode.rowIndex; // Get the row index of the clicked cell
     const position = jobsTable.rows[rowIndex].cells[0].textContent; // Get job title from first cell
-    const department = jobsTable.rows[rowIndex].cells[1].textContent; // Get company from second cell
+    const depar = jobsTable.rows[rowIndex].cells[1].textContent; // Get company from second cell
     const location = jobsTable.rows[rowIndex].cells[2].textContent; // Get location from third cell
     const status = jobsTable.rows[rowIndex].cells[3].textContent;
     const id = jobsTable.rows[rowIndex].cells[4].getAttribute('data-id'); // Get status from fourth cell
-    
+    depar = get_name_by_id(depar,department)
     // Fill modification form fields with retrieved data
     document.getElementById('modify-Position').value = position;
-    document.getElementById('modify-Department').value = department;
+    
     document.getElementById('modify-location').value = location;
     document.getElementById('modify-status').value = status;
-    document.getElementById('modify-id').value = id;
+    var selectElement = document.getElementById('modify-Department');
+    for (var i = 0; i < selectElement.options.length; i++) {
+    // Check if the option's value matches the department value
+    if (selectElement.options[i].value === department) {
+        // Set the option as selected
+        selectElement.selectedIndex = i;
+        // Exit the loop since we found the matching option
+        break;
+    }
+}
     
     
     jobsTable.style.display = 'none'; // Hide the table

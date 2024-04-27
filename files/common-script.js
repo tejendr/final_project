@@ -1,4 +1,8 @@
-
+function get_name_by_id(id, data):
+    for item in data:
+        if item['id'] == id:
+            return item['name']
+    return None
 
 if(window.location.href.indexOf('outreach')>0){
     const addButton = document.getElementById('addButton');
@@ -17,7 +21,7 @@ if(window.location.href.indexOf('outreach')>0){
       const phone = phoneInput.value.trim();
       const email = emailInput.value.trim();
       const position = positionSelect.value;
-      const department = departmentSelect.value;
+      const department = get_name_by_id(departmentSelect.value,department);
 
       // Validate data (optional, add checks for empty fields or invalid formats)
 
@@ -60,70 +64,7 @@ if(window.location.href.indexOf('outreach')>0){
 
 }
 
-if(window.location.href.indexOf('screening')>0){
-          // DOM elements
-const questionsTable = document.getElementById('questions-table');
-const filterDepartment = document.getElementById('filter-department');
-const filterJob = document.getElementById('filter-job');
-const filterQuestion = document.getElementById('filter-question');
-const filterLocation = document.getElementById('filter-location');
-const filterBtn = document.getElementById('filter-btn');
-const questionsContainer = document.getElementById('questions-container');
 
-// Sample questions data (replace with your actual data source)
-const questionsData = [
-  { department: 'Engineering', job: 'Software Engineer', jobId: 'SE123', location: 'Seattle', question: 'Describe your experience with data structures and algorithms.' },
-  { department: 'Engineering', job: 'Software Engineer', jobId: 'SE456', location: 'New York', question: 'Explain your approach to designing a scalable web application.' },
-  { department: 'Engineering', job: 'Software Engineer', jobId: 'SE789', location: 'Chicago', question: 'How do you test and debug complex software code?' },
-  // Add more questions for other positions here
-];
-
-// Function to populate the table with questions
-function populateTable(data) {
-  questionsTable.innerHTML = ''; // Clear existing rows
-  let tableRowW  =''
-  data.forEach(question => {
-    const tableRow = `<tr>
-      <td><span class="math-inline">`+question.department+`</td\>
-<td\></span>`+question.job+` (<span class="math-inline">`+question.jobId+`)</td\>
-<td\></span>`+question.question+`</td>
-      <td>`+question.location+`</td>
-      <td><button>Delete</button></td>
-    </tr>`;
-    tableRowW  = tableRowW + tableRow 
-    
-  });
-  $(questionsTable).html(tableRowW);
-}
-
-const addQuestionForm = document.getElementById('add-question-form');
-addQuestionForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission
-
-  // Extract new question data from the form
-  const newQuestion = {
-    department: 'Technology'/* Get department value from form */,
-    job: 'Software engineer'/* Get job value from form */,
-    question: 'Are you able to relocate'/* Get question text from form */,
-    location:'Seattle' /* Get location value from form (optional) */,
-  };
-
-  // Add the new question to the data array
-  questionsData.push(newQuestion);
-
-  // Clear the form
-  // ...
-
-  // Update the table with the new data
-  populateTable(questionsData);
-});
-
-window.onload = function() {
-  if (questionsTable) { // Check if element exists before accessing
-    populateTable(questionsData);
-  }
-};
-}
 
 if(window.location.href.indexOf('positions')>-1){
       const tabs = document.querySelectorAll('.tabs li');
@@ -161,22 +102,30 @@ tabs.forEach(tab => {
   });
 });
 
+
 jobsTable.addEventListener('click', function(event) {
   if (event.target.tagName === 'TD') { // Check if clicked element is a table cell (TD)
+
     const rowIndex = event.target.parentNode.rowIndex; // Get the row index of the clicked cell
-    const jobTitle = jobsTable.rows[rowIndex].cells[0].textContent; // Get job title from first cell
-    const company = jobsTable.rows[rowIndex].cells[1].textContent; // Get company from second cell
+    const position = jobsTable.rows[rowIndex].cells[0].textContent; // Get job title from first cell
+    const depar = jobsTable.rows[rowIndex].cells[1].textContent; // Get company from second cell
     const location = jobsTable.rows[rowIndex].cells[2].textContent; // Get location from third cell
-    const status = jobsTable.rows[rowIndex].cells[3].textContent; // Get status from fourth cell
-    
+    const status = jobsTable.rows[rowIndex].cells[3].textContent;
+    const id = jobsTable.rows[rowIndex].cells[4].getAttribute('data-id'); // Get status from fourth cell
+    depar = get_name_by_id(depar,department)
     // Fill modification form fields with retrieved data
-    document.getElementById('modify-title').value = jobTitle;
-    document.getElementById('modify-company').value = company;
+    document.getElementById('modify-Position').value = position;
+    
     document.getElementById('modify-location').value = location;
     document.getElementById('modify-status').value = status;
-    
-    jobsTable.style.display = 'none'; // Hide the table
-    modifyFormContainer.style.display = 'block'; // Show the modification form
-  }
-});
+    var selectElement = document.getElementById('modify-Department');
+    for (var i = 0; i < selectElement.options.length; i++) {
+    // Check if the option's value matches the department value
+    if (selectElement.options[i].value === department) {
+        // Set the option as selected
+        selectElement.selectedIndex = i;
+        // Exit the loop since we found the matching option
+        break;
+    }
+}
 }
